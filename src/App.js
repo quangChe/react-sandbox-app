@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.scss';
 
-function App() {
-  return (
-    <div>
+import Layout from './components/Layout/Layout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
-    </div>
+const App = () => {
+  return (
+    <Layout>
+      <BurgerBuilder></BurgerBuilder>
+    </Layout>
   );
 }
 
