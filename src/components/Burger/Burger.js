@@ -5,18 +5,35 @@ import './Burger.scss';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
 const Burger = props => {
+  let burgerIngredients = Object.keys(props.ingredients)
+    .map(ingredient => {
+      return [...Array(props.ingredients[ingredient])].map((_, i) => {
+        return <BurgerIngredient key={ingredient + i} type={ingredient}/>
+      });
+    })
+    .reduce((accum, elem) => {
+      return accum.concat(elem);
+    }, []);
+
+  burgerIngredients = burgerIngredients.length ? burgerIngredients 
+    : <p>Add ingredients to your burger!</p> 
+
   return (
     <div className="Burger">
-      <BurgerIngredient type="bread-top"></BurgerIngredient>
-      <BurgerIngredient type="cheese"></BurgerIngredient>
-      <BurgerIngredient type="meat"></BurgerIngredient>
-      <BurgerIngredient type="bread-bottom"></BurgerIngredient>
+      <BurgerIngredient type="bread-top"/>
+      { burgerIngredients }
+      <BurgerIngredient type="bread-bottom"/>
     </div>
   )
 }
 
 Burger.propTypes = {
-
+  ingredients: PropTypes.shape({
+    salad: PropTypes.number,
+    bacon: PropTypes.number,
+    cheese: PropTypes.number,
+    meat: PropTypes.number
+  }).isRequired
 }
 
 export default Burger
