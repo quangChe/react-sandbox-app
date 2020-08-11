@@ -1,13 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Burger.scss';
-import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
+import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const Burger = props => {
   let burgerIngredients = Object.keys(props.ingredients)
     .map(ingredient => {
-      return [...Array(props.ingredients[ingredient])].map((_, i) => {
+      return [...Array(props.ingredients[ingredient])]
+        .map((_, i) => {
         return <BurgerIngredient key={ingredient + i} type={ingredient}/>
       });
     })
@@ -16,7 +17,7 @@ const Burger = props => {
     }, []);
 
   burgerIngredients = burgerIngredients.length ? burgerIngredients 
-    : <p>Add ingredients to your burger!</p> 
+    : <p>Add ingredients to your burger!</p>;
 
   return (
     <div className="Burger">
@@ -25,7 +26,7 @@ const Burger = props => {
       <BurgerIngredient type="bread-bottom"/>
     </div>
   )
-}
+};
 
 Burger.propTypes = {
   ingredients: PropTypes.shape({
@@ -34,6 +35,6 @@ Burger.propTypes = {
     cheese: PropTypes.number,
     meat: PropTypes.number
   }).isRequired
-}
+};
 
-export default Burger
+export default Burger;
