@@ -14,17 +14,15 @@ const controlItems = [
 const BuildControls = props => {
   return (
     <div className="BuildControls">
-      
-      { 
-        controlItems.map((ctrl, i) => 
-          <ControlBox 
-            key={ctrl.label + i} 
-            label={ctrl.label} 
-            addIngredient={() => props.addIngredientHandler(ctrl.type)}
-            removeIngredient={() => props.removeIngredientHandler(ctrl.type)}
-            disableRemoval={props.disabledIngredients[ctrl.type]}/>
-        )
-      }
+      <p>Current Price: <strong>${props.totalPrice.toFixed(2)}</strong></p>
+      {controlItems.map((ctrl, i) => 
+        <ControlBox 
+          key={ctrl.label + i} 
+          label={ctrl.label} 
+          addIngredient={() => props.addIngredientHandler(ctrl.type)}
+          removeIngredient={() => props.removeIngredientHandler(ctrl.type)}
+          disableRemoval={props.disabledIngredients[ctrl.type]}/>
+      )}
     </div>
   )
 };  
@@ -37,7 +35,8 @@ BuildControls.propTypes = {
     bacon: PropTypes.bool.isRequired,
     cheese: PropTypes.bool.isRequired,
     meat: PropTypes.bool.isRequired
-  }).isRequired
+  }).isRequired,
+  totalPrice: PropTypes.number.isRequired
 };
 
 export default BuildControls;
