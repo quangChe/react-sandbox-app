@@ -16,7 +16,10 @@ const BuildControls = props => {
     <div className="BuildControls">
       { 
         controlItems.map((ctrl, i) => 
-          <ControlBox key={ctrl.label + i} label={ctrl.label}></ControlBox>
+          <ControlBox 
+            key={ctrl.label + i} 
+            label={ctrl.label} 
+            addIngredient={() => props.addIngredientHandler(ctrl.type)}/>
         )
       }
     </div>
@@ -24,7 +27,7 @@ const BuildControls = props => {
 };  
 
 BuildControls.propTypes = {
-
+  addIngredientHandler: PropTypes.func.isRequired,
 };
 
 export default BuildControls;
