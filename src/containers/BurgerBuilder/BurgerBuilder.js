@@ -19,14 +19,24 @@ class BurgerBuilder extends Component {
       cheese: 0,
       meat: 0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    orderReady: false
+  }
+
+  confirmOrderReady = () => {
+    const { ingredients } = this.state;
+    const totalIngredients = Object.keys(ingredients).reduce((sum, ingredientName) => {
+      return sum = sum + ingredients[ingredientName];
+    }, 0);
+    this.setState({orderReady: totalIngredients > 0})
   }
 
   addIngredientHandler = (type) => {
     const newCount = this.state.ingredients[type] + 1;
     const updatedIngredients = {...this.state.ingredients, [type]: newCount};
     const newPrice = this.state.totalPrice + INGREDIENT_PRICES[type];
-    this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+    this.setState({totalPrice: newPrice, ingredients: updatedIngredients}, 
+      this.confirmOrderReady);
   }
 
   removeIngredientHandler = (type) => {
@@ -34,7 +44,8 @@ class BurgerBuilder extends Component {
       const newCount = this.state.ingredients[type] - 1;
       const updatedIngredients = {...this.state.ingredients, [type]: newCount};
       const newPrice = this.state.totalPrice - INGREDIENT_PRICES[type];
-      this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+      this.setState({totalPrice: newPrice, ingredients: updatedIngredients}, 
+        this.confirmOrderReady);
     }
   }
 
@@ -55,7 +66,8 @@ class BurgerBuilder extends Component {
           addIngredientHandler={this.addIngredientHandler}
           removeIngredientHandler={this.removeIngredientHandler}
           disabledIngredients={disabledIngredients}
-          totalPrice={this.state.totalPrice}/>
+          totalPrice={this.state.totalPrice}
+          disableOrdering={!this.state.orderReady}/>
       </Aux>
     )
   }

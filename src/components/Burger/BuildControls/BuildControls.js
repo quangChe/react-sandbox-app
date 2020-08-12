@@ -23,6 +23,9 @@ const BuildControls = props => {
           removeIngredient={() => props.removeIngredientHandler(ctrl.type)}
           disableRemoval={props.disabledIngredients[ctrl.type]}/>
       )}
+      <button 
+        className="OrderButton"
+        disabled={props.disableOrdering}>Place Order</button>
     </div>
   )
 };  
@@ -36,7 +39,8 @@ BuildControls.propTypes = {
     cheese: PropTypes.bool.isRequired,
     meat: PropTypes.bool.isRequired
   }).isRequired,
-  totalPrice: PropTypes.number.isRequired
+  totalPrice: PropTypes.number.isRequired,
+  disableOrdering: PropTypes.bool.isRequired
 };
 
 export default BuildControls;
