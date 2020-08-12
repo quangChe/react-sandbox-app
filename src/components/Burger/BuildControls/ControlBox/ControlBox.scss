@@ -1,4 +1,4 @@
-.BuildControl {
+.ControlBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,16 +38,15 @@
     color: white;
   }
 
-  .Less:hover, .BuildControl .Less:active {  
+  .Less:hover, .Less:active {  
     background-color: #DAA972;
     color: white;
   }
 
-  .More:hover,.BuildControl .More:active {
+  .More:hover, .More:active {
     background-color: #99703F;
     color: white;
   }
-  /* End .BuildControl */
 }
 
 .Label {
