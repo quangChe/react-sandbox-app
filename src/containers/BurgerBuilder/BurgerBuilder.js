@@ -4,6 +4,8 @@ import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
+import OrderSheet from '../../components/Burger/OrderSheet/OrderSheet';
+
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -21,7 +23,8 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: 4,
-    orderReady: false
+    orderReady: false,
+    placingOrder: false
   }
 
   confirmOrderReady = () => {
@@ -50,6 +53,10 @@ class BurgerBuilder extends Component {
     }
   }
 
+  placeOrderHandler = (isPlacingOrder) => {
+    this.setState({placingOrder: isPlacingOrder});
+  }
+
   render() {
     const disabledIngredients = {
       ...this.state.ingredients
@@ -62,14 +69,17 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        <Modal/>
+        <Modal show={this.state.placingOrder}>
+          <OrderSheet ingredients={this.state.ingredients}/>
+        </Modal>)
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls 
           addIngredientHandler={this.addIngredientHandler}
           removeIngredientHandler={this.removeIngredientHandler}
           disabledIngredients={disabledIngredients}
           totalPrice={this.state.totalPrice}
-          disableOrdering={!this.state.orderReady}/>
+          disableOrdering={!this.state.orderReady}
+          placeOrder={() => this.placeOrderHandler(true)}/>
       </Aux>
     )
   }
