@@ -69,7 +69,7 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        <Modal show={this.state.placingOrder}>
+        <Modal show={this.state.placingOrder} hide={() => this.placeOrderHandler(false)}>
           <OrderSheet ingredients={this.state.ingredients}/>
         </Modal>)
         <Burger ingredients={this.state.ingredients}/>
