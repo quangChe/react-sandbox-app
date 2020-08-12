@@ -3,7 +3,7 @@ import React from 'react';
 import Aux from '../../hoc/Aux';
 import './Layout.scss';
 
-const layout = (props) => (
+const Layout = (props) => (
   <Aux>
     <div>Toolbar, SideDrawer, Backdrop</div>
     <main className="MainContent">
@@ -12,4 +12,4 @@ const layout = (props) => (
   </Aux>
 );
 
-export default layout;
+export default Layout;

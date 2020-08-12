@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { ingredientsProp } from '../../../props/ingredients';
 import './BuildControls.scss';
 import ControlBox from './ControlBox/ControlBox';
 
@@ -14,7 +14,7 @@ const controlItems = [
 const BuildControls = props => {
   return (
     <div className="BuildControls">
-      <p>Current Price: <strong>${props.totalPrice.toFixed(2)}</strong></p>
+      <p className="TotalPrice">Current Price: ${props.totalPrice.toFixed(2)}</p>
       {controlItems.map((ctrl, i) => 
         <ControlBox 
           key={ctrl.label + i} 
@@ -33,12 +33,7 @@ const BuildControls = props => {
 BuildControls.propTypes = {
   addIngredientHandler: PropTypes.func.isRequired,
   removeIngredientHandler: PropTypes.func.isRequired,
-  disabledIngredients: PropTypes.shape({
-    salad: PropTypes.bool.isRequired,
-    bacon: PropTypes.bool.isRequired,
-    cheese: PropTypes.bool.isRequired,
-    meat: PropTypes.bool.isRequired
-  }).isRequired,
+  disabledIngredients: ingredientsProp(true),
   totalPrice: PropTypes.number.isRequired,
   disableOrdering: PropTypes.bool.isRequired
 };
