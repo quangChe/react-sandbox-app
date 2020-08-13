@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ingredientsProp } from '../../../props/ingredients';
 import Aux from '../../../hoc/Aux';
+
+import Button from '../../UI/Button/Button';
 
 const OrderSheet = props => {
   const ingredientList = Object.keys(props.ingredients)
@@ -21,6 +22,12 @@ const OrderSheet = props => {
         {ingredientList}
       </ul>
       <p>Continue to checkout?</p>
+      <Button 
+        clicked={() => console.log('Cancel!')}
+        buttonType="Danger">Cancel</Button>
+      <Button 
+        clicked={() => console.log('Continue!')}
+        buttonType="Success">Continue</Button>
     </Aux>
   )
 };
