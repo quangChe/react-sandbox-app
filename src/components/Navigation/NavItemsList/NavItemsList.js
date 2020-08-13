@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './NavItemsList.scss';
 import NavItem from './NavItem/NavItem';
@@ -10,9 +9,5 @@ const NavItemsList = props => (
     <NavItem link="/">Checkout</NavItem>
   </ul>
 );
-
-NavItemsList.propTypes = {
-
-};
 
 export default NavItemsList;

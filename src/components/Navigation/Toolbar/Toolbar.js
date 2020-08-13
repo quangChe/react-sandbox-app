@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './Toolbar.scss';
 import Logo from '../../UI/Logo/Logo';
@@ -12,9 +11,5 @@ const Toolbar = props => (
     <NavItemsList/>
   </header>
 );
-
-Toolbar.propTypes = {
-
-};
 
 export default Toolbar;
