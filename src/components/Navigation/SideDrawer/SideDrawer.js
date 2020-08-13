@@ -7,7 +7,9 @@ import NavItemsList from '../NavItemsList/NavItemsList';
 const SideDrawer = props => {
   return (
     <div className="SideDrawer">
-      <Logo/>
+      <div className="LogoContainer">
+        <Logo/>
+      </div>
       <nav>
         <NavItemsList/>
       </nav>

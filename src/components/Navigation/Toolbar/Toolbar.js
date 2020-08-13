@@ -7,7 +7,9 @@ import NavItemsList from '../NavItemsList/NavItemsList';
 const Toolbar = props => (
   <header className="Toolbar">
     <div>Menu</div>
-    <Logo/>
+    <div className="LogoContainer">
+      <Logo/>
+    </div>
     <NavItemsList/>
   </header>
 );
