@@ -17,7 +17,6 @@ const Modal = props => (
       {props.children}
     </div>
   </Aux>
-  
 );
 
 Modal.propTypes = {

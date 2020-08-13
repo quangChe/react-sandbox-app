@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ingredientsProp } from '../../../props/ingredients';
 import Aux from '../../../hoc/Aux';
 
@@ -21,19 +22,23 @@ const OrderSheet = props => {
       <ul>
         {ingredientList}
       </ul>
+      <p><strong>Total Price: ${props.totalPrice.toFixed(2)}</strong></p>
       <p>Continue to checkout?</p>
       <Button 
-        clicked={() => console.log('Cancel!')}
+        clicked={props.cancel}
         buttonType="Danger">Cancel</Button>
       <Button 
-        clicked={() => console.log('Continue!')}
+        clicked={props.continue}
         buttonType="Success">Continue</Button>
     </Aux>
   )
 };
 
 OrderSheet.propTypes = {
+  totalPrice: PropTypes.number.isRequired,
   ingredients: ingredientsProp(),
+  cancel: PropTypes.func.isRequired,
+  continue: PropTypes.func.isRequired
 };
 
 export default OrderSheet;

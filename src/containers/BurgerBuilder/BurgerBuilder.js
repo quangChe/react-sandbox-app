@@ -57,6 +57,10 @@ class BurgerBuilder extends Component {
     this.setState({placingOrder: isPlacingOrder});
   }
 
+  continueOrder = () => {
+    alert('Continue!');
+  }
+
   render() {
     const disabledIngredients = {
       ...this.state.ingredients
@@ -70,8 +74,12 @@ class BurgerBuilder extends Component {
     return (
       <Aux>
         <Modal show={this.state.placingOrder} hide={() => this.placeOrderHandler(false)}>
-          <OrderSheet ingredients={this.state.ingredients}/>
-        </Modal>)
+          <OrderSheet 
+            totalPrice={this.state.totalPrice}
+            ingredients={this.state.ingredients}
+            continue={this.continueOrder}
+            cancel={() => this.placeOrderHandler(false)}/>
+        </Modal>
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls 
           addIngredientHandler={this.addIngredientHandler}
