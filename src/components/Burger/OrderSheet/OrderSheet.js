@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ingredientsProp } from '../../../props/ingredients';
-import Aux from '../../../hoc/Aux';
 
 import Button from '../../UI/Button/Button';
 
@@ -16,7 +15,7 @@ const OrderSheet = props => {
     });
 
   return (
-    <Aux>
+    <>
       <h3>Order Summary</h3>
       <p>Serving up your delicious burger with the following ingredients:</p>
       <ul>
@@ -30,7 +29,7 @@ const OrderSheet = props => {
       <Button 
         clicked={props.continue}
         buttonType="Success">Continue</Button>
-    </Aux>
+    </>
   )
 };
 

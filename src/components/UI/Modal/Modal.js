@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import './Modal.scss';
-import Aux from '../../../hoc/Aux';
 import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends Component {
@@ -17,7 +16,7 @@ class Modal extends Component {
 
   render() {
     return (
-      <Aux>
+      <>
         <Backdrop show={this.props.show} hide={this.props.hide}/>
         <div 
           className="Modal"
@@ -27,7 +26,7 @@ class Modal extends Component {
           }}>
           {this.props.children}
         </div>
-      </Aux>
+      </>
     )
   }
 }
