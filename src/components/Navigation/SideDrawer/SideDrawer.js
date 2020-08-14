@@ -7,12 +7,8 @@ import NavItemsList from '../NavItemsList/NavItemsList';
 import Backdrop from "../../UI/Backdrop/Backdrop";
 
 const SideDrawer = props => {
-  const toggleClass = [
-    "SideDrawer", 
-    props.opened ? "Open" : "Close"
-  ].join(' ');
+  const toggleClass = props.opened ? "SideDrawer Open" : "SideDrawer Close";
 
-  console.log(toggleClass);
   return (
     <>
       <Backdrop show={props.opened} hide={props.toggle}/>
