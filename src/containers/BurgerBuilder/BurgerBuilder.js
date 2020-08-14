@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import api from '../../api/api';
+
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -56,8 +58,26 @@ class BurgerBuilder extends Component {
     this.setState({placingOrder: isPlacingOrder});
   }
 
-  continueOrder = () => {
-    alert('Continue!');
+  submitOrder = () => {
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'Quang Che',
+        address: {
+          street: '123 Test Rd.',
+          city: 'Los Angeles',
+          state: 'CA',
+          zip: '92626',
+        },
+        email: 'qtest@testing123.com'
+      },
+      deliveryMethod: 'fastest'
+    }
+
+    api.post('/orders.json', order)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -76,7 +96,7 @@ class BurgerBuilder extends Component {
           <OrderSheet 
             totalPrice={this.state.totalPrice}
             ingredients={this.state.ingredients}
-            continue={this.continueOrder}
+            continue={this.submitOrder}
             cancel={() => this.placeOrderHandler(false)}/>
         </Modal>
         <Burger ingredients={this.state.ingredients}/>
