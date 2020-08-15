@@ -7,6 +7,7 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSheet from '../../components/Burger/OrderSheet/OrderSheet';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
+import withErrorHandling from '../../hoc/withErrorHandling/withErrorHandling';
 
 
 const INGREDIENT_PRICES = {
@@ -18,16 +19,21 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
+    ingredients: null,
     totalPrice: 4,
     orderReady: false,
     placingOrder: false,
     loading: false
+  }
+
+  componentDidMount() {
+    api.get('/ingredients.json')
+      .then(response => {
+        this.setState({ingredients: response.data})
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   confirmOrderReady = () => {
@@ -85,7 +91,7 @@ class BurgerBuilder extends Component {
       })
       .catch(error => {
         this.setState({loading: false, placingOrder: false});
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -99,7 +105,7 @@ class BurgerBuilder extends Component {
       disabledIngredients[key] = disabledIngredients[key] <= 0;
     }
 
-    const orderForm = this.state.loading 
+    const orderForm = (this.state.loading || !this.state.ingredients)
       ? <LoadingSpinner/> 
       : <OrderSheet 
           totalPrice={this.state.totalPrice}
@@ -107,22 +113,30 @@ class BurgerBuilder extends Component {
           continue={this.submitOrder}
           cancel={() => this.placeOrderHandler(false)}/>;
 
+    const burgerView = !this.state.ingredients 
+      ? <LoadingSpinner/>
+      : (
+          <>
+            <Burger ingredients={this.state.ingredients}/>
+            <BuildControls 
+              addIngredientHandler={this.addIngredientHandler}
+              removeIngredientHandler={this.removeIngredientHandler}
+              disabledIngredients={disabledIngredients}
+              totalPrice={this.state.totalPrice}
+              disableOrdering={!this.state.orderReady}
+              placeOrder={() => this.placeOrderHandler(true)}/>
+          </>
+        );
+
     return (
       <>
         <Modal show={this.state.placingOrder} hide={() => this.placeOrderHandler(false)}>
           {orderForm}
         </Modal>
-        <Burger ingredients={this.state.ingredients}/>
-        <BuildControls 
-          addIngredientHandler={this.addIngredientHandler}
-          removeIngredientHandler={this.removeIngredientHandler}
-          disabledIngredients={disabledIngredients}
-          totalPrice={this.state.totalPrice}
-          disableOrdering={!this.state.orderReady}
-          placeOrder={() => this.placeOrderHandler(true)}/>
+        {burgerView}
       </>
     )
   }
 }
 
-export default BurgerBuilder;
+export default withErrorHandling(BurgerBuilder, api);
